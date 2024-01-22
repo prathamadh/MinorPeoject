@@ -45,6 +45,10 @@ def calculate_loudness_intervals(audio_data, sample_rate, interval_duration=0.1)
 
 
 if __name__ == "__main__":
+    
+    MIC_ON_VALUE=20
+
+
     print("rec started")
     mic = pa.PyAudio()
     stream = mic.open(format=pa.paInt16, channels= 1, rate= 16000, input= True, frames_per_buffer= 8192)
@@ -61,7 +65,7 @@ if __name__ == "__main__":
         # Now you have a 0.1-second audio chunk in the form of a NumPy array
 
         time_intervals, loudness_intervals = calculate_loudness_intervals(audio_chunk, 16000, interval_duration=0.1)
-        if loudness_intervals >20:
+        if loudness_intervals >MIC_ON_VALUE:
             print("speaking")
             print(loudness_intervals)
 
